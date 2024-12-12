@@ -25,6 +25,9 @@ class Player:
         self.num_of_cards_to_deal = num_of_cards_to_deal
         self.cards = []  # Initialize an empty list to hold the players cards
 
+    def __str__(self):
+        return f"Player: {self.player_name}, Cards: {self.cards}"
+
     def set_hand(self, deck_of_cards: DeckOfCards):
         """
         Set the players hand by dealing a specified number of cards from the deck.
