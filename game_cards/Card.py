@@ -11,6 +11,9 @@ class Card:
             raise TypeError("Suit must be an integer.")
         if value < 2 or value > 14:
             raise ValueError("value must be between 2 to 14")
+        if suit < 1 or suit > 4:
+            raise ValueError("suit must be between 1 to 4")
+
         self.value = value
         self.suit = suit
 
@@ -61,7 +64,7 @@ class Card:
         Check if 2 cards are equal
         """
         if not isinstance(other, Card):
-            return False
+            raise TypeError("Can only compare Card instances.")
         return self.value == other.value and self.suit == other.suit
 
 
