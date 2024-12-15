@@ -55,6 +55,7 @@ class TestDeckOfCards(TestCase):
     def test_deal_one_size_reduce(self):
         """Test that deal_one reduce deck size by 1"""
         original_size = len(self.deck.cards)
+        self.deck.deal_one()
         self.assertEqual(len(self.deck.cards), original_size - 1)
 
     def test_deal_one_return_card(self):
