@@ -10,7 +10,7 @@ class TestDeckOfCards(TestCase):
 
     # ------------------------------------------------ initialization tests ------------------------------------------
     def test_full_deck(self):
-        """Test that the deck initializes with 52 unique cards"""
+        """Test that the deck initializes with 52 cards"""
         self.assertEqual(len(self.deck.cards), 52)
 
     def test_unique_cards(self):

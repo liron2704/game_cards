@@ -2,7 +2,7 @@ from game_cards.DeckOfCards import DeckOfCards
 from game_cards.Player import Player
 
 class CardGame:
-    def __init__(self, player1_name, player2_name, num_of_cards_to_deal):
+    def __init__(self, player1_name, player2_name, num_of_cards_to_deal = 26):
         """
         Initialize the CardGame.
         player1_name (str): The name of the first player
@@ -13,24 +13,29 @@ class CardGame:
             raise TypeError("Player names must be strings.")
         if not isinstance(num_of_cards_to_deal, int):
             raise TypeError("Number of cards to deal must be an integer.")
+        if num_of_cards_to_deal < 10 or num_of_cards_to_deal > 26:
+            num_of_cards_to_deal = 26  # Default to 26 if out of range
+            raise ValueError(
+                "Number of cards to deal must be between 10 to 26 "
+                "(Initialized the number to default: 26)"
+            )
+        # Set a flag to track initialization
+        self.is_initializing = True
 
         # Create the deck and players
         self.deck_of_cards = DeckOfCards()
         self.player1 = Player(player1_name, num_of_cards_to_deal)
         self.player2 = Player(player2_name, num_of_cards_to_deal)
 
-        # Set a flag to track initialization
-        self._is_initializing = True
-
         # Start the game
         self.new_game()
 
         # Clear the initialization flag
-        self._is_initializing = False
+        self.is_initializing = False
 
     def new_game(self):
         """Start a new game by shuffling the deck and dealing cards to the players"""
-        if not self._is_initializing:
+        if not self.is_initializing:
             raise RuntimeError("new_game can only be called during initialization (__init__).")
 
         # Shuffle the deck and deal cards to both players
@@ -48,3 +53,5 @@ class CardGame:
         if len(self.player1.cards) > len(self.player2.cards):
             return self.player1  # Player 1 has more cards
         return self.player2  # Player 2 has more cards
+
+

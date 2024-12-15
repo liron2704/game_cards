@@ -2,6 +2,7 @@ from unittest import TestCase
 from game_cards.DeckOfCards import DeckOfCards
 from game_cards.Card import Card
 from game_cards.Player import Player
+from unittest import mock
 
 
 class TestPlayer(TestCase):
@@ -142,6 +143,16 @@ class TestPlayer(TestCase):
         self.player.set_hand(self.deck)
         unique_dealt_cards = set(str(card) for card in self.player.cards)
         self.assertEqual(len(self.player.cards), len(unique_dealt_cards))
+
+    @mock.patch('game_cards.DeckOfCards.DeckOfCards.deal_one', return_value=Card(12,2))
+    def test_set_hand_deal_card(self,mock_obj):
+        """Test that player deck have the card number of times he asked for"""
+        self.player.set_hand(self.deck)
+        cards_list = []
+        for _ in range(15):
+            cards_list.append(Card(12,2))
+        self.assertEqual(cards_list,self.player.cards)
+
 
 
 # ------------------------------------------------- Get Card Tests -----------------------------------------------------
