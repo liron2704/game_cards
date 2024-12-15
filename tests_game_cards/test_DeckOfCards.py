@@ -38,7 +38,7 @@ class TestDeckOfCards(TestCase):
         self.assertNotEqual(original_order, shuffled_order)
 
     def test_same_len_cards_after_shuffle(self):
-        """Length of deck do no change after shuffle"""
+        """Length of deck dont change after shuffle"""
         original_order = list(self.deck.cards)  # Copy the original order
         self.deck.cards_shuffle()
         self.assertEqual(len(original_order), len(self.deck.cards))
@@ -86,35 +86,3 @@ class TestDeckOfCards(TestCase):
         dealt_cards = [self.deck.deal_one() for _ in range(52)]
         unique_dealt_cards = set(str(card) for card in dealt_cards)
         self.assertEqual(len(dealt_cards), len(unique_dealt_cards))
-
-# def test_invalid_test_set_hand_lowest_cards(self):
-
-#     try:
-
-#         player = Player("Avi", 9)
-
-#         #self.assertEqual(player.number_of_cards, 26)
-
-#         self.assertEqual(len(player.cards) , 26)
-
-#     except Exception as e:
-
-#         print(f"{e}")
-
-
-# def test_invalid_set_hand_lowest_cards(self):
-#     with self.assertRaises(ValueError):
-#         player = Player("Avi", 9)
-#
-#         player.set_hand(DeckOfCards())
-#
-#         self.assertEqual(player.number_of_cards, 26)
-#
-#
-# def test_invalid_set_hand_highest_cards(self):
-#     with self.assertRaises(ValueError):
-#         player = Player("Avi", 27)
-#
-#         player.set_hand(DeckOfCards())
-#
-#         self.assertEqual(player.number_of_cards, 26)

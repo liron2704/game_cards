@@ -32,10 +32,10 @@ class Player:
         """
         Set the players hand by dealing a specified number of cards from the deck.
         """
-        if len(deck_of_cards.cards) < self.num_of_cards_to_deal: #not enough cards to deal
-            raise ValueError(f"Not enough cards in the deck to deal {self.num_of_cards_to_deal} cards.")
         if not isinstance(deck_of_cards, DeckOfCards):
             raise TypeError("Deck of cards must be DeckOfCards type.")
+        if len(deck_of_cards.cards) < self.num_of_cards_to_deal: #not enough cards to deal
+            raise ValueError(f"Not enough cards in the deck to deal {self.num_of_cards_to_deal} cards.")
         for _ in range(self.num_of_cards_to_deal):
             self.cards.append(deck_of_cards.deal_one())  # Add cards to the players cards list
 
@@ -43,15 +43,13 @@ class Player:
         """
         Get random card from players cards list.
         """
-        if len(self.cards) == 0:
+        if len(self.cards) <= 0:
             raise ValueError("Cannot get a card: the players hand is empty.")
         random_index = random.randint(0, len(self.cards) - 1)  # Pick a random index
         return self.cards.pop(random_index)  # Remove and return the card
 
     def add_card(self, card: Card):
-        """
-        Add a card to players cards list.
-        """
+        """Add a card to players cards list"""
         if not isinstance(card, Card):
             raise TypeError("You can only add a Card object to the players hand.")
         self.cards.append(card)  # Add the card to the players cards list
