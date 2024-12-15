@@ -48,19 +48,14 @@ class TestPlayer(TestCase):
 
     def test_invalid_num_of_cards_range_low(self):
         """Test invalid number of cards below range"""
-        with self.assertRaises(ValueError):
-            Player("TestPlayer", 9)
+        player = Player("TestPlayer", 9)
+        self.assertEqual(26,player.num_of_cards_to_deal)
 
     def test_invalid_num_of_cards_range_high(self):
         """Test invalid number of cards above range"""
-        with self.assertRaises(ValueError):
-            Player("TestPlayer", 27)
+        player = Player("TestPlayer", 27)
+        self.assertEqual(26,player.num_of_cards_to_deal)
 
-    def test_invalid_num_of_cards_changes_to_26(self):
-        """Test invalid number of cards changes to 26"""
-        with self.assertRaises(ValueError):
-            player = Player("TestPlayer", 9)
-            self.assertEqual(player.num_of_cards_to_deal,26)
 
 # ------------------------------------------------- Set Hand Tests -----------------------------------------------------
 
@@ -83,17 +78,15 @@ class TestPlayer(TestCase):
 
     def test_Invalid_set_hand_high_limit(self):
         """Test set hand with Invalid deck high limit"""
-        with self.assertRaises(ValueError):
-            player = Player('TestPlayer',27)
-            player.set_hand(self.deck)
-            self.assertEqual(len(player.cards), 26)
+        player = Player('TestPlayer',27)
+        player.set_hand(self.deck)
+        self.assertEqual(len(player.cards), 26)
 
     def test_Invalid_set_hand_low_limit(self):
         """Test set hand with Invalid deck low limit"""
-        with self.assertRaises(ValueError):
-            player = Player('TestPlayer',9)
-            player.set_hand(self.deck)
-            self.assertEqual(len(player.cards), 26)
+        player = Player('TestPlayer',9)
+        player.set_hand(self.deck)
+        self.assertEqual(len(player.cards), 26)
 
     def test_set_hand_removes_from_deck(self):
         """Test set hand removes the card from deck"""
@@ -114,17 +107,15 @@ class TestPlayer(TestCase):
 
     def test_set_hand_removes_from_deck_Invalid_cards_to_deal_high_limit(self):
         """Test set hand removes the card from deck with Invalid cards to deal number high limit"""
-        with self.assertRaises(ValueError):
-            player = Player('TestPlayer', 27)
-            player.set_hand(self.deck)
-            self.assertEqual(len(self.deck.cards), 26)
+        player = Player('TestPlayer', 27)
+        player.set_hand(self.deck)
+        self.assertEqual(len(self.deck.cards), 26)
 
     def test_set_hand_removes_from_deck_Invalid_cards_to_deal_low_limit(self):
         """Test set hand removes the card from deck with Invalid cards to deal number low limit"""
-        with self.assertRaises(ValueError):
-            player = Player('TestPlayer', 9)
-            player.set_hand(self.deck)
-            self.assertEqual(len(self.deck.cards), 26)
+        player = Player('TestPlayer', 9)
+        player.set_hand(self.deck)
+        self.assertEqual(len(self.deck.cards), 26)
 
     def test_set_hand_invalid_deck_type(self):
         """Test set hand with an invalid deck type"""

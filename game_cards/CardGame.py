@@ -15,7 +15,7 @@ class CardGame:
             raise TypeError("Number of cards to deal must be an integer.")
         if num_of_cards_to_deal < 10 or num_of_cards_to_deal > 26:
             num_of_cards_to_deal = 26  # Default to 26 if out of range
-            raise ValueError(
+            print(
                 "Number of cards to deal must be between 10 to 26 "
                 "(Initialized the number to default: 26)"
             )

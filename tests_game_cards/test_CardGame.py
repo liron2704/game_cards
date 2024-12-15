@@ -67,36 +67,32 @@ class TestCardGame(TestCase):
         Test that invalid player1 number of cards to deal initialization successfully low limit
         Initialize number of cards to deal to 26
         """
-        with self.assertRaises(ValueError):
-            card_game = CardGame('TestPlayer1','TestPlayer2',9)
-            self.assertEqual(card_game.player1.num_of_cards_to_deal,26)
+        card_game = CardGame('TestPlayer1','TestPlayer2',9)
+        self.assertEqual(card_game.player1.num_of_cards_to_deal,26)
 
     def test_invalid_initialization_player1_number_of_cards_to_deal_successfully_high_limit(self):
         """
         Test that invalid player1 number of cards to deal initialization successfully high limit
         Initialize number of cards to deal to 26
         """
-        with self.assertRaises(ValueError):
-            card_game = CardGame('TestPlayer1','TestPlayer2',27)
-            self.assertEqual(card_game.player1.num_of_cards_to_deal,26)
+        card_game = CardGame('TestPlayer1','TestPlayer2',27)
+        self.assertEqual(card_game.player1.num_of_cards_to_deal,26)
 
     def test_invalid_initialization_player2_number_of_cards_to_deal_successfully_low_limit(self):
         """
         Test that invalid player2 number of cards to deal initialization successfully low limit
         Initialize number of cards to deal to 26
         """
-        with self.assertRaises(ValueError):
-            card_game = CardGame('TestPlayer1','TestPlayer2',9)
-            self.assertEqual(card_game.player2.num_of_cards_to_deal,26)
+        card_game = CardGame('TestPlayer1','TestPlayer2',9)
+        self.assertEqual(card_game.player2.num_of_cards_to_deal,26)
 
     def test_invalid_initialization_player2_number_of_cards_to_deal_successfully_high_limit(self):
         """
         Test that invalid player2 number of cards to deal initialization successfully high limit
         Initialize number of cards to deal to 26
         """
-        with self.assertRaises(ValueError):
-            card_game = CardGame('TestPlayer1','TestPlayer2',27)
-            self.assertEqual(card_game.player2.num_of_cards_to_deal,26)
+        card_game = CardGame('TestPlayer1','TestPlayer2',27)
+        self.assertEqual(card_game.player2.num_of_cards_to_deal,26)
 
     def test_False_is_initialization(self):
         """Test that initialization flag is False after initialization"""
