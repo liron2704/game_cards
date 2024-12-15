@@ -1,13 +1,13 @@
-from DeckOfCards import DeckOfCards
-from Player import Player
+from game_cards.DeckOfCards import DeckOfCards
+from game_cards.Player import Player
 
 class CardGame:
     def __init__(self, player1_name, player2_name, num_of_cards_to_deal):
         """
         Initialize the CardGame.
-        player1_name (str): The name of the first player.
-        player2_name (str): The name of the second player.
-        num_of_cards_to_deal (int): The number of cards to deal to each player.
+        player1_name (str): The name of the first player
+        player2_name (str): The name of the second player
+        num_of_cards_to_deal (int): The number of cards to deal to each player
         """
         if not isinstance(player1_name, str) or not isinstance(player2_name, str):
             raise TypeError("Player names must be strings.")
@@ -29,9 +29,7 @@ class CardGame:
         self._is_initializing = False
 
     def new_game(self):
-        """
-        Start a new game by shuffling the deck and dealing cards to the players.
-        """
+        """Start a new game by shuffling the deck and dealing cards to the players"""
         if not self._is_initializing:
             raise RuntimeError("new_game can only be called during initialization (__init__).")
 

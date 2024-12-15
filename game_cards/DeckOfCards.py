@@ -1,11 +1,11 @@
 import random
-from Card import Card
+from game_cards.Card import Card
 
 class DeckOfCards:
     def __init__(self):
         """
         Initialize the deck of cards.
-        The deck is created by creating 52 diffrent cards of object Card
+        The deck is created by creating 52 different cards of object Card
         with values(2-14) and suits(1-4)
         """
         self.cards = []
@@ -16,21 +16,21 @@ class DeckOfCards:
 
     def cards_shuffle(self):
         """
-        Shuffle the deck of cards using random.shuffle.
+        Shuffle the deck of cards using random.shuffle
         """
         random.shuffle(self.cards)
 
     def deal_one(self):
         """
-        Deal one random card from the deck.
-        It picks a random index, removes the card at that index from the deck, and returns it.
+        Deal one random card from the deck
+        It picks a random index, removes the card at index from the deck and returns it
         """
         if len(self.cards) == 0:  # Check if the deck is empty
-            raise ValueError("Cannot deal a card: the deck is empty.")
+            raise ValueError("Cannot deal a card: the deck is empty")
 
         random_index = random.randint(0, len(self.cards) - 1)  # Pick a random index from the deck
-        removed_card = self.cards.pop(random_index)  # Remove and return the card
-        return removed_card
+        return self.cards.pop(random_index)  # Remove and return the card
+
 
 
 

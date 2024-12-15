@@ -8,7 +8,7 @@ class TestCard(TestCase):
         self.card3 = Card(9,2) # 9 of Spade
         self.card4 = Card(2,1) # 2 of Diamond
 
-# ------------------------------------------------ initialization tests --------------------------------------------------
+# ------------------------------------------------ initialization tests ------------------------------------------------
 
     def test_invalid_card_value_type(self):
         with self.assertRaises(TypeError):

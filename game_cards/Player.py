@@ -1,5 +1,5 @@
-from DeckOfCards import DeckOfCards
-from Card import Card
+from game_cards.DeckOfCards import DeckOfCards
+from game_cards.Card import Card
 import random
 
 
@@ -15,7 +15,7 @@ class Player:
         if not isinstance(num_of_cards_to_deal, int):
             raise TypeError("number of cards to deal must be an integer.")
         if num_of_cards_to_deal < 10 or num_of_cards_to_deal > 26:
-            self.num_of_cards_to_deal = 26  # Default to 26 if out of range
+            num_of_cards_to_deal = 26  # Default to 26 if out of range
             raise ValueError(
                 "number of cards to deal must be between 10 to 26 "
                 "(initialized the number to default: 26)"
@@ -32,10 +32,10 @@ class Player:
         """
         Set the players hand by dealing a specified number of cards from the deck.
         """
-        if len(deck_of_cards.cards) < self.num_of_cards_to_deal:
-            raise ValueError(
-                f"Not enough cards in the deck to deal {self.num_of_cards_to_deal} cards."
-            )
+        if len(deck_of_cards.cards) < self.num_of_cards_to_deal: #not enough cards to deal
+            raise ValueError(f"Not enough cards in the deck to deal {self.num_of_cards_to_deal} cards.")
+        if not isinstance(deck_of_cards, DeckOfCards):
+            raise TypeError("Deck of cards must be DeckOfCards type.")
         for _ in range(self.num_of_cards_to_deal):
             self.cards.append(deck_of_cards.deal_one())  # Add cards to the players cards list
 
