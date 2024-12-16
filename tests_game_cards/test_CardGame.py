@@ -3,6 +3,7 @@ from game_cards.CardGame import CardGame
 from game_cards.DeckOfCards import DeckOfCards
 from game_cards.Player import Player
 from game_cards.Card import Card
+from unittest import mock
 
 
 class TestCardGame(TestCase):
@@ -12,19 +13,19 @@ class TestCardGame(TestCase):
 
 # ------------------------------------------------ Initialization Tests ------------------------------------------------
     def test_invalid_player1_type_initialization(self):
-        """Test Invalid player1 name type"""
+        """Test invalid player1 name type"""
         with self.assertRaises(TypeError):
-            card_game = CardGame(5,'TestPlayer2',15)
+            CardGame(5,'TestPlayer2',15)
 
     def test_invalid_player2_type_initialization(self):
-        """Test Invalid player2 name type"""
+        """Test invalid player2 name type"""
         with self.assertRaises(TypeError):
-            card_game = CardGame('TestPlayer1',[2,4,5],15)
+            CardGame('TestPlayer1',[2,4,5],15)
 
     def test_invalid_num_of_cards_to_deal_type_initialization(self):
         """Test invalid cards to deal type"""
         with self.assertRaises(TypeError):
-            card_game = CardGame('TestPlayer1','TestPlayer2', {15:'test'})
+            CardGame('TestPlayer1','TestPlayer2', {15:'test'})
 
     def test_initialization_player1_name_successfully(self):
         """Test that valid player1 name initialization successfully"""
@@ -36,11 +37,11 @@ class TestCardGame(TestCase):
 
     def test_initialization_player1_number_of_cards_to_deal_successfully(self):
         """Test that valid player1 number of cards to deal initialization successfully"""
-        self.assertEqual(self.card_game.player1.num_of_cards_to_deal,15)
+        self.assertEqual(self.card_game.player1.num_of_cards_to_deal,26)
 
     def test_initialization_player2_number_of_cards_to_deal_successfully(self):
         """Test that valid player2 number of cards to deal initialization successfully"""
-        self.assertEqual(self.card_game.player2.num_of_cards_to_deal,15)
+        self.assertEqual(self.card_game.player2.num_of_cards_to_deal,26)
 
     def test_initialization_player2_number_of_cards_to_deal_successfully_low_limit(self):
         """Test that valid player2 number of cards to deal initialization successfully low limit"""
@@ -62,7 +63,7 @@ class TestCardGame(TestCase):
         card_game = CardGame('TestPlayer1','TestPlayer2',26)
         self.assertEqual(card_game.player1.num_of_cards_to_deal,26)
 
-    def test_invalid_initialization_player1_number_of_cards_to_deal_successfully_low_limit(self):
+    def test_out_range_initialization_player1_number_of_cards_to_deal_low_limit(self):
         """
         Test that invalid player1 number of cards to deal initialization successfully low limit
         Initialize number of cards to deal to 26
@@ -70,7 +71,7 @@ class TestCardGame(TestCase):
         card_game = CardGame('TestPlayer1','TestPlayer2',9)
         self.assertEqual(card_game.player1.num_of_cards_to_deal,26)
 
-    def test_invalid_initialization_player1_number_of_cards_to_deal_successfully_high_limit(self):
+    def test_out_range_initialization_player1_number_of_cards_to_deal_high_limit(self):
         """
         Test that invalid player1 number of cards to deal initialization successfully high limit
         Initialize number of cards to deal to 26
@@ -78,7 +79,7 @@ class TestCardGame(TestCase):
         card_game = CardGame('TestPlayer1','TestPlayer2',27)
         self.assertEqual(card_game.player1.num_of_cards_to_deal,26)
 
-    def test_invalid_initialization_player2_number_of_cards_to_deal_successfully_low_limit(self):
+    def test_out_range_initialization_player2_number_of_cards_to_deal_low_limit(self):
         """
         Test that invalid player2 number of cards to deal initialization successfully low limit
         Initialize number of cards to deal to 26
@@ -86,7 +87,7 @@ class TestCardGame(TestCase):
         card_game = CardGame('TestPlayer1','TestPlayer2',9)
         self.assertEqual(card_game.player2.num_of_cards_to_deal,26)
 
-    def test_invalid_initialization_player2_number_of_cards_to_deal_successfully_high_limit(self):
+    def test_out_range_initialization_player2_number_of_cards_to_deal_high_limit(self):
         """
         Test that invalid player2 number of cards to deal initialization successfully high limit
         Initialize number of cards to deal to 26
@@ -94,12 +95,12 @@ class TestCardGame(TestCase):
         card_game = CardGame('TestPlayer1','TestPlayer2',27)
         self.assertEqual(card_game.player2.num_of_cards_to_deal,26)
 
-    def test_False_is_initialization(self):
+    def test_is_initialization_False(self):
         """Test that initialization flag is False after initialization"""
         self.assertFalse(self.card_game.is_initializing)
 
     def test_deck_cards_is_created(self):
-        """Test that deck card has been created well"""
+        """Test that deck card has been created with 52 cards"""
         deck = DeckOfCards()
         self.card_game.deck_of_cards = DeckOfCards()
         self.assertEqual(len(deck.cards), len(self.card_game.deck_of_cards.cards))
@@ -108,9 +109,15 @@ class TestCardGame(TestCase):
         """Test that the deck in CardGame contains unique cards"""
         cards_in_deck = self.card_game.deck_of_cards.cards
         unique_cards = set((card.value, card.suit) for card in cards_in_deck)
-
         # Assert that the number of unique cards equals the total cards in the deck
         self.assertEqual(len(cards_in_deck), len(unique_cards))
+
+    @mock.patch('game_cards.CardGame.CardGame.new_game')
+    def test_new_game_called_once(self,mock_new_game):
+        """Test that new_game was called exactly once during initialization"""
+        CardGame("Player1", "Player2", 26)
+        mock_new_game.assert_called_once()
+
 
 
 # ------------------------------------------------ New Game Tests --------------------------------------------------

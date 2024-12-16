@@ -30,13 +30,13 @@ class CardGame:
         # Start the game
         self.new_game()
 
-        # Clear the initialization flag
+        # Clear initialization flag
         self.is_initializing = False
 
     def new_game(self):
         """Start a new game by shuffling the deck and dealing cards to the players"""
         if not self.is_initializing:
-            raise RuntimeError("new_game can only be called during initialization (__init__).")
+            raise RuntimeError("new_game can only be called during initialization.")
 
         # Shuffle the deck and deal cards to both players
         self.deck_of_cards.cards_shuffle()
@@ -49,7 +49,7 @@ class CardGame:
         None: If both players have the same number of cards.
         """
         if len(self.player1.cards) == len(self.player2.cards):
-            return None  #tie
+            return None  # Tie
         if len(self.player1.cards) > len(self.player2.cards):
             return self.player1  # Player 1 has more cards
         return self.player2  # Player 2 has more cards

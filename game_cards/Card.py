@@ -60,9 +60,7 @@ class Card:
         return self.suit > other.suit  # Compare suits if values are equal
 
     def __eq__(self, other):
-        """
-        Check if 2 cards are equal
-        """
+        """Check if 2 cards are equal"""
         if not isinstance(other, Card):
             raise TypeError("Can only compare Card instances.")
         return self.value == other.value and self.suit == other.suit

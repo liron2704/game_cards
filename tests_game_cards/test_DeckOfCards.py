@@ -5,7 +5,7 @@ from game_cards.Card import Card
 
 class TestDeckOfCards(TestCase):
     def setUp(self):
-        """Create a new DeckOfCards instance for each test"""
+        """Create a new deck for each test"""
         self.deck = DeckOfCards()
 
     # ------------------------------------------------ initialization tests ------------------------------------------
@@ -16,18 +16,17 @@ class TestDeckOfCards(TestCase):
     def test_unique_cards(self):
         """Check that all cards are unique"""
         unique_cards = set(str(card) for card in self.deck.cards)
-        print(unique_cards)
         self.assertEqual(len(unique_cards), 52)
 
     def test_card_values(self):
-        """Test that all card values in range."""
+        """Test that all card values in range"""
         for card in self.deck.cards:
-            self.assertIn(card.value, range(2, 15), "Card value should be between 2 and 14")
+            self.assertIn(card.value, range(2, 15))
 
     def test_card_suits(self):
-        """Card suits should be between 1 and 4."""
+        """Card suits should be between 1 and 4"""
         for card in self.deck.cards:
-            self.assertIn(card.suit, range(1, 5), "Card suit should be between 1 and 4")
+            self.assertIn(card.suit, range(1, 5))
 
     # ------------------------------------------------ shuffle tests ------------------------------------------------
     def test_shuffle_changes_order(self):
@@ -59,7 +58,7 @@ class TestDeckOfCards(TestCase):
         self.assertEqual(len(self.deck.cards), original_size - 1)
 
     def test_deal_one_return_card(self):
-        """"Test that deal_one returns the card"""
+        """Test that deal_one returns the card"""
         dealt_card = self.deck.deal_one()
         self.assertIsInstance(dealt_card, Card)
 
@@ -70,13 +69,13 @@ class TestDeckOfCards(TestCase):
 
     def test_deal_one_until_empty(self):
         """Test that dealing all cards works correctly and raises an error when empty"""
-        for _ in range(52):
+        for _ in range(len(self.deck.cards)): # Range of 52 (pack size)
             self.deck.deal_one()
-        self.assertEqual(len(self.deck.cards), 0)
+        self.assertEqual(len(self.deck.cards), 0) # Card deck is empty
 
     def test_deal_one_when_empty(self):
         """Test that raise error when deal card from empty deck"""
-        for _ in range(52):
+        for _ in range(len(self.deck.cards)): # Range of 52 (pack size)
             self.deck.deal_one()
         with self.assertRaises(ValueError):
             self.deck.deal_one()

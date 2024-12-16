@@ -29,20 +29,16 @@ class Player:
         return f"Player: {self.player_name}, Cards: {self.cards}"
 
     def set_hand(self, deck_of_cards: DeckOfCards):
-        """
-        Set the players hand by dealing a specified number of cards from the deck.
-        """
+        """Set the players hand by dealing a specified number of cards from the deck."""
         if not isinstance(deck_of_cards, DeckOfCards):
             raise TypeError("Deck of cards must be DeckOfCards type.")
-        if len(deck_of_cards.cards) < self.num_of_cards_to_deal: #not enough cards to deal
+        if len(deck_of_cards.cards) < self.num_of_cards_to_deal: # Not enough cards to deal
             raise ValueError(f"Not enough cards in the deck to deal {self.num_of_cards_to_deal} cards.")
         for _ in range(self.num_of_cards_to_deal):
             self.cards.append(deck_of_cards.deal_one())  # Add cards to the players cards list
 
     def get_card(self):
-        """
-        Get random card from players cards list.
-        """
+        """Get random card from players cards list."""
         if len(self.cards) <= 0:
             raise ValueError("Cannot get a card: the players hand is empty.")
         random_index = random.randint(0, len(self.cards) - 1)  # Pick a random index

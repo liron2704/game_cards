@@ -15,9 +15,7 @@ class DeckOfCards:
                 self.cards.append(Card(value, suit))
 
     def cards_shuffle(self):
-        """
-        Shuffle the deck of cards using random.shuffle
-        """
+        """Shuffle the deck of cards using random.shuffle"""
         random.shuffle(self.cards)
 
     def deal_one(self):

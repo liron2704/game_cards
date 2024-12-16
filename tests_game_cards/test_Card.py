@@ -11,69 +11,81 @@ class TestCard(TestCase):
 # ------------------------------------------------ initialization tests ------------------------------------------------
 
     def test_invalid_card_value_type(self):
+        """Test invalid card value type"""
         with self.assertRaises(TypeError):
-            card = Card('9',2) # Invalid card value type
+            Card('9',2)
 
     def test_invalid_card_suit_type(self):
+        """Test invalid card suit type"""
         with self.assertRaises(TypeError):
-            card = Card(9,'2') # Invalid card suit type
+            card = Card(9,'2')
 
     def test_valid_low_limit_value(self):
-        self.assertEqual(2,self.card4.value) # Valid lowest limit range value
+        """Test valid lowest limit range value"""
+        self.assertEqual(2,self.card4.value)
 
     def test_valid_upper_limit_value(self):
-        self.assertEqual(14,self.card1.value) # Valid upper limit range value
+        """Test valid upper limit range value"""
+        self.assertEqual(self.card1.value,14)
 
     def test_valid_value(self):
-        self.assertEqual(9,self.card2.value) # Valid middle range value
+        """Test valid middle range value"""
+        self.assertEqual(self.card2.value,9)
 
     def test_invalid_low_limit_value_range(self):
+        """Test invalid card value low limit"""
         with self.assertRaises(ValueError):
-            card = Card(1,2) # Invalid card value low limit
+            card = Card(1,2)
 
     def test_invalid_upper_limit_value_range(self):
+        """Test invalid card value upper limit"""
         with self.assertRaises(ValueError):
-            card = Card(15,2) # Invalid card value upper limit
+            card = Card(15,2)
 
     def test_valid_low_limit_suit(self):
-        self.assertEqual(1, self.card4.suit)  # Valid lowest limit range suit
+        """Test valid lowest limit range suit"""
+        self.assertEqual(self.card4.suit, 1)
 
     def test_valid_upper_limit_suit(self):
-        self.assertEqual(4,self.card1.suit) # Valid upper limit range suit
+        """Test valid upper limit range suit"""
+        self.assertEqual(self.card1.suit,4)
 
     def test_valid_suit(self):
-        self.assertEqual(2,self.card3.suit) # Valid middle range suit
+        """Test valid middle range suit"""
+        self.assertEqual(self.card3.suit,2)
 
     def test_invalid_low_limit_suit_range(self):
+        """Test invalid card suit low limit"""
         with self.assertRaises(ValueError):
-            card = Card(9,0) # Invalid card suit low limit
+            Card(9,0)
 
     def test_invalid_upper_limit_suit_range(self):
+        """Test invalid card suit upper limit"""
         with self.assertRaises(ValueError):
-            card = Card(9,5) # Invalid card suit upper limit
+            Card(9,5)
 
 # ------------------------------------------------ gt func tests --------------------------------------------------
 
     def test_greater_value(self):
-        # Test when one card has a higher value
+        """Test when one card has a higher value"""
         self.assertTrue(self.card1 > self.card2)
 
     def test_equal_value_higher_suit(self):
-        # Test when values are equal, but one card has a higher suit
+        """Test when values are equal, but one card has a higher suit"""
         self.assertTrue(self.card2 > self.card3)
 
     def test_less_than(self):
-        # Test when the first card is less than the second
+        """Test when the first card is less than the second"""
         self.assertFalse(self.card4 > self.card3)
 
     def test_equal_cards(self):
-        # Test when both cards are the same
+        """Test when both cards are the same"""
         card1 = Card(11, 2)  # Jack of Spades
         card2 = Card(11, 2)  # Jack of Spades
         self.assertFalse(card1 > card2)  # They are equal, so card1 is not greater than card2
 
     def test_invalid_gt_compare_type(self):
-        # Test when comparing a card to not card object
+        """Test when comparing a card to not card object"""
         with self.assertRaises(TypeError):
             self.card1 > 42  # Comparing to an integer
 
@@ -81,24 +93,24 @@ class TestCard(TestCase):
 # ------------------------------------------------ eq func tests --------------------------------------------------
 
     def test_invalid_eq_compare_type(self):
-        # Test when comparing a card to not card object
+        """Test when comparing a card to not card object"""
         with self.assertRaises(TypeError):
             self.card1 == 42  # Comparing to an integer
 
     def test_valid_equal_cards(self):
-        # Test when comparing a card to equal card
+        """Test when comparing a card to equal card"""
         card1 = Card(11, 2)  # Jack of Spades
         card2 = Card(11, 2)  # Jack of Spades
         self.assertTrue(card1 == card2)
 
     def test_valid_not_equal_cards_value(self):
-        # Test when comparing not equal cards when only value different
+        """Test when comparing not equal cards when only value different"""
         card1 = Card(9, 2)  # 9 of Spades
         card2 = Card(11, 2)  # Jack of Spades
         self.assertFalse(card1 == card2)
 
     def test_valid_not_equal_cards_suit(self):
-        # Test when comparing not equal cards when only suit different
+        """Test when comparing not equal cards when only suit different"""
         card1 = Card(11, 3)  # Jack of Heart
         card2 = Card(11, 2)  # Jack of Spades
         self.assertFalse(card1 == card2)

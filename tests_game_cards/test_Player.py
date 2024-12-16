@@ -123,7 +123,7 @@ class TestPlayer(TestCase):
             self.player.set_hand("15")
 
     def test_set_hand_not_enough_cards(self):
-        """Test set hand when the deck doesnt have enough cards"""
+        """Test set hand when the deck does not have enough cards"""
         player = Player("TestPlayer", 26)
         self.deck.cards = []
         with self.assertRaises(ValueError):
@@ -163,7 +163,7 @@ class TestPlayer(TestCase):
         self.assertEqual(len(player.cards), 25)
 
     def test_get_card_not_enough_cards(self):
-        """Test get card when the player deck doesnt have enough cards"""
+        """Test get card when the player deck does not have enough cards"""
         player = Player("TestPlayer", 26)
         deck = DeckOfCards()
         player.set_hand(deck)
