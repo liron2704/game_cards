@@ -135,7 +135,7 @@ class TestCardGame(TestCase):
         mock_cards_shuffle.assert_called_once()
 
     @mock.patch('game_cards.Player.Player.set_hand')
-    def test_new_game_set_hand_called_once(self,mock_set_hand):
+    def test_new_game_set_hand_called_twice(self,mock_set_hand):
         """Test that set hand called exactly two times"""
         CardGame("Player1", "Player2", 26)
         # Verify that set_hand was called twice, once for each player

@@ -47,8 +47,8 @@ if __name__ == "__main__":
                 print(f"{game.player2.player_name} wins this round!")
                 game.player2.add_card(card1)
                 game.player2.add_card(card2)
-            else:
-                print("It's a tie! No cards for anyone.")  # Should never happen with 1 card deck
+            else: # Should never happen with 1 card deck (Tie)
+                print("It's a tie! No cards for anyone.")
 
         except ValueError as e:
             print(f"Error in round {round_num}: {e}")
