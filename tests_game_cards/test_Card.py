@@ -18,7 +18,7 @@ class TestCard(TestCase):
     def test_invalid_card_suit_type(self):
         """Test invalid card suit type"""
         with self.assertRaises(TypeError):
-            card = Card(9,'Test ')
+            card = Card(9,'Test')
 
     def test_valid_low_limit_value(self):
         """Test valid lowest limit range value"""

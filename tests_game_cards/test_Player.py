@@ -24,7 +24,7 @@ class TestPlayer(TestCase):
 
     def test_valid_cards_list_empty_initialization(self):
         """Test player pack is empty"""
-        self.assertEqual(len(self.player.cards), 0)
+        self.assertEqual(self.player.cards, [])
 
     def test_invalid_name_type(self):
         """Test invalid player name type"""
@@ -35,6 +35,14 @@ class TestPlayer(TestCase):
         """Test invalid number of cards type"""
         with self.assertRaises(TypeError):
             Player("TestPlayer", "15")
+
+    def test_default_num_of_cards_to_deal(self):
+        """
+        Test that initialization player without number of cards to deal
+        gives 26 cards to deal as a default
+        """
+        player = Player('TestPlayer')
+        self.assertEqual(player.num_of_cards_to_deal,26)
 
     def test_valid_num_of_cards_range_low_limit(self):
         """Test low limit of valid number of cards"""
@@ -136,7 +144,7 @@ class TestPlayer(TestCase):
         self.assertEqual(len(self.player.cards), len(unique_dealt_cards))
 
     @mock.patch('game_cards.DeckOfCards.DeckOfCards.deal_one', return_value=Card(12,2))
-    def test_set_hand_deal_card(self,mock_obj):
+    def test_set_hand_deal_card(self,mock_deal_one):
         """Test that player deck have the card number of times he asked for"""
         self.player.set_hand(self.deck)
         cards_list = []

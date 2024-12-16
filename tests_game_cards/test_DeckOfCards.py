@@ -46,12 +46,13 @@ class TestDeckOfCards(TestCase):
         self.deck.cards_shuffle()
         self.assertEqual(len(original_order), len(self.deck.cards))
 
-    def test_deck_after_shuffle(self):
-        """Test that the deck has the same cards after shuffling"""
-        original_cards = set(str(card) for card in self.deck.cards)
-        self.deck.cards_shuffle()
-        shuffled_cards = set(str(card) for card in self.deck.cards)
-        self.assertEqual(original_cards, shuffled_cards)
+    # maybe unnecessary (test random.shuffle functionality)
+    # def test_deck_after_shuffle(self):
+    #     """Test that the deck has the same cards after shuffling"""
+    #     original_cards = set(str(card) for card in self.deck.cards)
+    #     self.deck.cards_shuffle()
+    #     shuffled_cards = set(str(card) for card in self.deck.cards)
+    #     self.assertEqual(original_cards, shuffled_cards)
 
     # ------------------------------------------------ deal_one tests ------------------------------------------------
 
