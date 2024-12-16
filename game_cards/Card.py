@@ -35,10 +35,10 @@ class Card:
             14: "Ace"  # Ace is the highest value
         }
         suit_values = {
-            1: "Diamond",
-            2: "Spade",
-            3: "Heart",
-            4: "Club"
+            1: "Diamond ♦",
+            2: "Spade ♠",
+            3: "Heart ♥",
+            4: "Club ♣"
         }
         return f"{value_values[self.value]} of {suit_values[self.suit]}"
 
