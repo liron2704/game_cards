@@ -45,7 +45,7 @@ class CardGame:
 
     def get_winner(self):
         """
-        return the winner based on the number of who have more cards
+        Return the winner based on the number of who have more cards
         None: If both players have the same number of cards.
         """
         if len(self.player1.cards) == len(self.player2.cards):
