@@ -127,6 +127,20 @@ class TestCardGame(TestCase):
         with self.assertRaises(RuntimeError):
             self.card_game.new_game()
 
+    @mock.patch('game_cards.DeckOfCards.DeckOfCards.cards_shuffle')
+    def test_new_game_shuffle_called_once(self,mock_cards_shuffle):
+        """Test that shuffle called exactly one time"""
+        CardGame("Player1", "Player2", 26)
+        # Assert that cards_shuffle called exactly once
+        mock_cards_shuffle.assert_called_once()
+
+    @mock.patch('game_cards.Player.Player.set_hand')
+    def test_new_game_set_hand_called_once(self,mock_set_hand):
+        """Test that set hand called exactly two times"""
+        CardGame("Player1", "Player2", 26)
+        # Verify that set_hand was called twice, once for each player
+        self.assertEqual(mock_set_hand.call_count, 2)
+
 # ------------------------------------------------ Get Winner Tests --------------------------------------------------
 
     def test_get_winner_tie(self):
