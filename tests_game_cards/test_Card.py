@@ -70,9 +70,14 @@ class TestCard(TestCase):
         """Test when one card has a higher value"""
         self.assertTrue(self.card1 > self.card2)
 
+    def test_greater_value_false(self):
+        """Test when one card has a higher value False"""
+        self.assertFalse(self.card2 > self.card1)
+
     def test_equal_value_higher_suit(self):
         """Test when values are equal, but one card has a higher suit"""
         self.assertTrue(self.card2 > self.card3)
+
 
     def test_less_than(self):
         """Test when the first card is less than the second"""

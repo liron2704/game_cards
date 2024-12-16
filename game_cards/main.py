@@ -48,7 +48,7 @@ if __name__ == "__main__":
                 game.player2.add_card(card1)
                 game.player2.add_card(card2)
             else: # Should never happen with 1 card deck (Tie)
-                print("It's a tie! No cards for anyone.")
+                print("Its a tie! No cards for anyone.")
 
         except ValueError as e:
             print(f"Error in round {round_num}: {e}")

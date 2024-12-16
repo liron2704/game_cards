@@ -28,6 +28,10 @@ class TestDeckOfCards(TestCase):
         for card in self.deck.cards:
             self.assertIn(card.suit, range(1, 5))
 
+    def test_card_list_type(self):
+        """Test that cards is a list"""
+        self.assertIsInstance(self.deck.cards, list)
+
     # ------------------------------------------------ shuffle tests ------------------------------------------------
     def test_shuffle_changes_order(self):
         """Test that shuffling the deck changes the order of the cards"""
@@ -80,7 +84,7 @@ class TestDeckOfCards(TestCase):
         with self.assertRaises(ValueError):
             self.deck.deal_one()
 
-    def test_no_duplicate_cards_deal(self):
+    def test_no_duplicate_cards_deal(self): # maybe unnecessary because we test no duplicates cards
         """Test that no dealing duplicate card"""
         dealt_cards = [self.deck.deal_one() for _ in range(52)]
         unique_dealt_cards = set(str(card) for card in dealt_cards)
