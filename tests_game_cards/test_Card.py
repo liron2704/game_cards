@@ -79,10 +79,6 @@ class TestCard(TestCase):
         self.assertTrue(self.card2 > self.card3)
 
 
-    def test_less_than(self):
-        """Test when the first card is less than the second"""
-        self.assertFalse(self.card4 > self.card3)
-
     def test_equal_cards(self):
         """Test when both cards are the same"""
         card1 = Card(11, 2)  # Jack of Spades

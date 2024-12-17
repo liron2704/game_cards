@@ -124,8 +124,7 @@ class TestCardGame(TestCase):
 
     def test_new_game_not_in_initialization(self):
         """Test invalid func new_game call not from initialization"""
-        with self.assertRaises(RuntimeError):
-            self.card_game.new_game()
+        self.assertEqual(self.card_game.new_game(),None)
 
     @mock.patch('game_cards.DeckOfCards.DeckOfCards.cards_shuffle')
     def test_new_game_shuffle_called_once(self,mock_cards_shuffle):

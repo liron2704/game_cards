@@ -113,13 +113,13 @@ class TestPlayer(TestCase):
         player.set_hand(self.deck)
         self.assertEqual(len(self.deck.cards), 26)
 
-    def test_set_hand_removes_from_deck_Invalid_cards_to_deal_high_limit(self):
+    def test_set_hand_removes_high_limit(self):
         """Test set hand removes the card from deck with Invalid cards to deal number high limit"""
         player = Player('TestPlayer', 27)
         player.set_hand(self.deck)
         self.assertEqual(len(self.deck.cards), 26)
 
-    def test_set_hand_removes_from_deck_Invalid_cards_to_deal_low_limit(self):
+    def test_set_hand_removes_low_limit(self):
         """Test set hand removes the card from deck with Invalid cards to deal number low limit"""
         player = Player('TestPlayer', 9)
         player.set_hand(self.deck)
@@ -134,14 +134,22 @@ class TestPlayer(TestCase):
         """Test set hand when the deck does not have enough cards"""
         player = Player("TestPlayer", 26)
         self.deck.cards = []
-        with self.assertRaises(ValueError):
-            self.player.set_hand(self.deck)
+        player.set_hand(self.deck)
+        self.assertEqual(player.num_of_cards_to_deal,0)
 
     def test_uniq_cards_deck(self):
         """Test that all cards in player deck are unique"""
         self.player.set_hand(self.deck)
         unique_dealt_cards = set(str(card) for card in self.player.cards)
         self.assertEqual(len(self.player.cards), len(unique_dealt_cards))
+
+    def test_set_hand_removes_cards_from_deck(self):
+        """Test that dealt cards are not in the deck anymore"""
+        deck = DeckOfCards()
+        player = Player("Test_Player", 10)
+        player.set_hand(deck)
+        for card in player.cards:
+            self.assertNotIn(card,deck.cards)
 
     @mock.patch('game_cards.DeckOfCards.DeckOfCards.deal_one', return_value=Card(12,2))
     def test_set_hand_deal_card(self,mock_deal_one):
@@ -177,8 +185,7 @@ class TestPlayer(TestCase):
         player.set_hand(deck)
         for _ in range(player.num_of_cards_to_deal):
             player.get_card()
-        with self.assertRaises(ValueError):
-            self.player.get_card()
+        self.assertEqual(self.player.get_card(),None)
 
     def test_get_card_not_in_player_deck_after(self):
         """Test that removed card not in the players deck after get card"""
@@ -206,7 +213,7 @@ class TestPlayer(TestCase):
         self.player.add_card(self.card)
         self.assertEqual(len(self.player.cards),1)
 
-    def test_add_card_successfully_with_cards_in_deck(self):
+    def test_add_card_with_cards_in_deck(self):
         """Test that card added successfully to the player deck with cards in deck"""
         self.player.set_hand(self.deck)
         self.player.add_card(self.card)

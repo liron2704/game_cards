@@ -15,10 +15,6 @@ class CardGame:
             raise TypeError("Number of cards to deal must be an integer.")
         if num_of_cards_to_deal < 10 or num_of_cards_to_deal > 26:
             num_of_cards_to_deal = 26  # Default to 26 if out of range
-            print(
-                "Number of cards to deal must be between 10 to 26 "
-                "(Initialized the number to default: 26)"
-            )
         # Set a flag to track initialization
         self.is_initializing = True
 
@@ -36,7 +32,8 @@ class CardGame:
     def new_game(self):
         """Start a new game by shuffling the deck and dealing cards to the players"""
         if not self.is_initializing:
-            raise RuntimeError("new_game can only be called during initialization.")
+            print("new_game can only be called during initialization.")
+            return
 
         # Shuffle the deck and deal cards to both players
         self.deck_of_cards.cards_shuffle()

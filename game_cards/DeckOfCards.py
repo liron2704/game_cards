@@ -24,7 +24,7 @@ class DeckOfCards:
         It picks a random index, removes the card at index from the deck and returns it
         """
         if len(self.cards) == 0:  # Check if the deck is empty
-            raise ValueError("Cannot deal a card: the deck is empty")
+            return
 
         random_index = random.randint(0, len(self.cards) - 1)  # Pick a random index from the deck
         return self.cards.pop(random_index)  # Remove and return the card

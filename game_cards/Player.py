@@ -16,10 +16,6 @@ class Player:
             raise TypeError("number of cards to deal must be an integer.")
         if num_of_cards_to_deal < 10 or num_of_cards_to_deal > 26:
             num_of_cards_to_deal = 26  # Default to 26 if out of range
-            print(
-                "number of cards to deal must be between 10 to 26 "
-                "(initialized the number to default: 26)"
-            )
 
         self.player_name = player_name
         self.num_of_cards_to_deal = num_of_cards_to_deal
@@ -33,14 +29,14 @@ class Player:
         if not isinstance(deck_of_cards, DeckOfCards):
             raise TypeError("Deck of cards must be DeckOfCards type.")
         if len(deck_of_cards.cards) < self.num_of_cards_to_deal: # Not enough cards to deal
-            raise ValueError(f"Not enough cards in the deck to deal {self.num_of_cards_to_deal} cards.")
+            self.num_of_cards_to_deal = len(deck_of_cards.cards)
         for _ in range(self.num_of_cards_to_deal):
             self.cards.append(deck_of_cards.deal_one())  # Add cards to the players cards list
 
     def get_card(self):
         """Get random card from players cards list."""
         if len(self.cards) <= 0:
-            raise ValueError("Cannot get a card: the players hand is empty.")
+            return
         random_index = random.randint(0, len(self.cards) - 1)  # Pick a random index
         return self.cards.pop(random_index)  # Remove and return the card
 
